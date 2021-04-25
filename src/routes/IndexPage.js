@@ -26,7 +26,7 @@ const initialMessages = [
 const defaultQuickReplies = [
   {
     icon: 'message',
-    name: '联系人工服务',
+    name: '联系人工服务111',
     isNew: true,
     isHighlight: true,
   },
