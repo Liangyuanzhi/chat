@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Tabs, Card, Table, Form, Button } from "antd";
 import { returnTableProps, list } from "./config/table";
 const { TabPane } = Tabs;
@@ -11,10 +10,10 @@ function callback(key) {
 const Demo = (props) => {
   const [form] = Form.useForm();
   const handleSubmit = () => {
-    const { validateFields } = form;
-    validateFields((err, value) => {
-      console.log(value);
-    });
+    const { getFieldInstance } = form;
+    // validateFields((err, value) => {
+    //   console.log(value);
+    // });
   };
   return (
     <Card
@@ -28,7 +27,9 @@ const Demo = (props) => {
         {list.map((vNode) => {
           return (
             <TabPane tab={vNode.name} key={vNode.key}>
-              <Table {...returnTableProps(props, form)} />
+              <Table
+                {...returnTableProps(props, form)}
+              />
             </TabPane>
           );
         })}

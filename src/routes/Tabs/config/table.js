@@ -1,22 +1,37 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:35:50
- * @LastEditTime: 2021-04-26 17:21:47
+ * @LastEditTime: 2021-04-26 19:58:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/routes/Tabs/config/table.js
  */
 import React from "react";
-import { Tag, Space, Input, InputNumber, Select, Form } from "antd";
+import { Tag, Space, Input, InputNumber, Select, Form, Button } from "antd";
 
 const returnColumns = (props, form) => {
-  const { getFieldInstance } = form;
   return [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (text) => {
+        return (
+          <Form.Item
+            name={["user", "name"]}
+            rules={[{ required: true, message: "请输入" }]}
+          >
+            <Select defaultValue="1" style={{ width: 120 }}>
+              <Select.Option value="1">Jack</Select.Option>
+              <Select.Option value="2">Peter</Select.Option>
+              <Select.Option value="3" disabled>
+                Rose
+              </Select.Option>
+              <Select.Option value="4">Tom</Select.Option>
+            </Select>
+          </Form.Item>
+        );
+      },
     },
     {
       title: "Age",
@@ -122,6 +137,14 @@ const list = [
 const returnTableProps = (props, form) => {
   return {
     dataSource: dataSource,
+    title: () => {
+      return (
+        <React.Fragment>
+          <Button type="text">新增行</Button>
+          <Button type="text">删除行</Button>
+        </React.Fragment>
+      );
+    },
     columns: returnColumns(props, form),
   };
 };
