@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:35:50
- * @LastEditTime: 2021-04-26 19:58:01
+ * @LastEditTime: 2021-04-29 17:51:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/routes/Tabs/config/table.js
  */
 import React from "react";
 import { Tag, Space, Input, InputNumber, Select, Form, Button } from "antd";
+import { ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
 
 const returnColumns = (props, form) => {
   return [
@@ -18,6 +19,7 @@ const returnColumns = (props, form) => {
       render: (text) => {
         return (
           <Form.Item
+            style={{ marginBottom: 0 }}
             name={["user", "name"]}
             rules={[{ required: true, message: "请输入" }]}
           >
@@ -40,6 +42,7 @@ const returnColumns = (props, form) => {
       render: (text) => {
         return (
           <Form.Item
+            style={{ marginBottom: 0 }}
             name={["user", "age"]}
             rules={[{ required: true, message: "请输入" }]}
           >
@@ -55,6 +58,7 @@ const returnColumns = (props, form) => {
       render: (text) => {
         return (
           <Form.Item
+            style={{ marginBottom: 0 }}
             name={["user", "address"]}
             rules={[{ required: true, message: "请输入" }]}
           >
@@ -140,12 +144,20 @@ const returnTableProps = (props, form) => {
     title: () => {
       return (
         <React.Fragment>
-          <Button type="text">新增行</Button>
-          <Button type="text">删除行</Button>
+          <Button type="link" icon={<ZoomInOutlined />}>
+            新增行
+          </Button>
+          <Button type="link" icon={<ZoomOutOutlined />}>
+            删除行
+          </Button>
         </React.Fragment>
       );
     },
     columns: returnColumns(props, form),
+    bordered: true,
+    rowSelection: {
+      type: "radio",
+    },
   };
 };
 export { returnTableProps, list };

@@ -10,7 +10,6 @@ function callback(key) {
 const Demo = (props) => {
   const [form] = Form.useForm();
   const handleSubmit = () => {
-    const { getFieldInstance } = form;
     // validateFields((err, value) => {
     //   console.log(value);
     // });
