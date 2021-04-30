@@ -1,14 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 16:35:50
- * @LastEditTime: 2021-04-29 17:51:00
+ * @LastEditTime: 2021-04-30 11:46:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/routes/Tabs/config/table.js
  */
 import React from "react";
-import { Tag, Space, Input, InputNumber, Select, Form, Button } from "antd";
-import { ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
+import { Tag, Space, Input, InputNumber, Select, Form } from "antd";
 
 const returnColumns = (props, form) => {
   return [
@@ -122,6 +121,58 @@ const dataSource = [
     address: "Sidney No. 1 Lake Park",
     tags: ["cool", "teacher"],
   },
+  {
+    key: "4",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+
+  {
+    key: "5",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+  {
+    key: "6",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+
+  {
+    key: "7",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+  {
+    key: "8",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+
+  {
+    key: "9",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+  {
+    key: "10",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
 ];
 const list = [
   {
@@ -141,23 +192,9 @@ const list = [
 const returnTableProps = (props, form) => {
   return {
     dataSource: dataSource,
-    title: () => {
-      return (
-        <React.Fragment>
-          <Button type="link" icon={<ZoomInOutlined />}>
-            新增行
-          </Button>
-          <Button type="link" icon={<ZoomOutOutlined />}>
-            删除行
-          </Button>
-        </React.Fragment>
-      );
-    },
     columns: returnColumns(props, form),
     bordered: true,
-    rowSelection: {
-      type: "radio",
-    },
+    size: "middle",
   };
 };
 export { returnTableProps, list };

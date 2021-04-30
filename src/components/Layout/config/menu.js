@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 09:59:35
- * @LastEditTime: 2021-04-26 15:40:27
+ * @LastEditTime: 2021-04-30 10:40:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/components/Layout/config/menu.js
@@ -22,6 +22,7 @@ import {
   FundOutlined,
   SlidersOutlined,
   DiffOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
  const menu = [
   {
@@ -47,6 +48,12 @@ import {
         key: "select",
         path: "/select",
         icon: <BarChartOutlined />,
+      },
+      {
+        title: "Route",
+        key: "route",
+        path: "/route",
+        icon: <LogoutOutlined />,
       },
     ],
   },

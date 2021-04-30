@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 10:49:22
- * @LastEditTime: 2021-04-26 11:41:32
+ * @LastEditTime: 2021-04-30 10:40:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/components/Layout/config/layout-routes.js
@@ -17,5 +17,19 @@ import Select from "../../../routes/Select";
 import Tag from "../../../routes/Tag";
 import Progress from "../../../routes/Progress";
 import Card from "../../../routes/Card";
+import Route from "../../../routes/Route";
 
-export { Chat, Table, Tabs, Input, Form, List, Modal, Select, Tag, Progress, Card };
+export {
+  Chat,
+  Table,
+  Tabs,
+  Input,
+  Form,
+  List,
+  Modal,
+  Select,
+  Tag,
+  Progress,
+  Card,
+  Route,
+};

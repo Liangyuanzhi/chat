@@ -13,6 +13,7 @@ import {
   Tag,
   Progress,
   Card,
+  Route as Router,
 } from "./config/routes";
 import menu from "./config/menu";
 
@@ -65,7 +66,13 @@ const LayoutWpper = (props) => {
     <Layout style={{ height: "100%" }} id="components-layout-demo-top">
       <Header
         className="header"
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{
+          position: "fixed",
+          zIndex: 1,
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
         <div
           className="logo"
@@ -82,18 +89,26 @@ const LayoutWpper = (props) => {
           <Menu.Item key="3">nav 3</Menu.Item>
         </Menu>
       </Header>
-      <Content style={{ padding: "0 50px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
+      <Content style={{ padding: "0 50px", marginTop: "80px", marginBottom: '50px' }}>
+        {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <Layout
           style={{ height: "100%" }}
           className="site-layout-background"
           // style={{ padding: "24px 0" }}
         >
-          <Sider className="site-layout-background" width={200}>
+          <Sider
+            className="site-layout-background"
+            width={256}
+            style={{
+              overflow: "auto",
+              height: "100vh",
+              position: "fixed",
+            }}
+          >
             <Menu
               mode="inline"
               selectedKeys={[pathname]}
@@ -104,7 +119,9 @@ const LayoutWpper = (props) => {
               {menuSource}
             </Menu>
           </Sider>
-          <Content style={{ padding: "0 24px", minHeight: 280 }}>
+          <Content
+            style={{ padding: "0 24px", minHeight: 280, marginLeft: "256px" }}
+          >
             <Switch>
               <Route path="/tabs" component={Tabs} />
               <Route path="/table" component={Table} />
@@ -114,17 +131,18 @@ const LayoutWpper = (props) => {
               <Route path="/list" component={List} />
               <Route path="/modal" component={Modal} />
               <Route path="/select" component={Select} />
+              <Route path="/route" component={Router} />
               <Route path="/tag" component={Tag} />
               <Route path="/progress" component={Progress} />
               <Route path="/card" component={Card} />
-              <Redirect to="/chat" />
+              <Redirect to="/tabs" />
             </Switch>
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: "center" }}>
+      {/* <Footer style={{ textAlign: "center" }}>
         Ant Design ©2018 Created by Ant UED
-      </Footer>
+      </Footer> */}
     </Layout>
   );
 };
