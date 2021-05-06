@@ -14,6 +14,7 @@ import {
   Progress,
   Card,
   Route as Router,
+  ReactForm,
 } from "./config/routes";
 import menu from "./config/menu";
 
@@ -135,6 +136,7 @@ const LayoutWpper = (props) => {
               <Route path="/tag" component={Tag} />
               <Route path="/progress" component={Progress} />
               <Route path="/card" component={Card} />
+              <Route path="/rc/form" component={ReactForm} />
               <Redirect to="/tabs" />
             </Switch>
           </Content>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 09:59:35
- * @LastEditTime: 2021-04-30 10:40:12
+ * @LastEditTime: 2021-04-30 17:37:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/components/Layout/config/menu.js
@@ -63,6 +63,12 @@ import {
     path: "/subnav2",
     icon: <LaptopOutlined />,
     children: [
+      {
+        title: "React Form",
+        key: "rc/form",
+        path: "/rc/form",
+        icon: <DotChartOutlined />,
+      },
       {
         title: "Tag",
         key: "tag",
