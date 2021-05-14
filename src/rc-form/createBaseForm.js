@@ -104,7 +104,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       onCollectCommon(name, action, args) {
-        debugger;
+        // debugger;
         const fieldMeta = this.fieldsStore.getFieldMeta(name);
         if (fieldMeta[action]) {
           fieldMeta[action](...args);

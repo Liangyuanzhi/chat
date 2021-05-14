@@ -1,8 +1,8 @@
 import { createForm } from "../../rc-form";
 // import ReactClass from './ReactClass'
 import RefClass from './RefClass'
-
-
+import {Input} from 'antd'
+const { TextArea } = Input;
 
 
 const RcForm = (props) => {
@@ -14,7 +14,7 @@ const RcForm = (props) => {
     e && e.stopPropagation();
     validateFields((err, value) => {
       if (!err) {
-        // console.log(value);
+        console.log(value);
       }
     });
   };
@@ -37,6 +37,10 @@ const RcForm = (props) => {
           initialValue:'32u4324343443'
         })(<input type="password" style={{ marginTop: "15px" }} />)}
         <br />
+        {/* <label>备注: </label>
+        {getFieldDecorator("user.memo", {
+        })(<TextArea style={{ marginTop: "15px" }} />)}
+        <br /> */}
         <label>记住密码: </label>
         {getFieldDecorator("user.lockpassword", {
           valuePropName: "checked",
