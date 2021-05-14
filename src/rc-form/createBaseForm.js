@@ -27,6 +27,7 @@ import FieldElemWrapper from './FieldElemWrapper';
 const DEFAULT_TRIGGER = 'onChange';
 
 function createBaseForm(option = {}, mixins = []) {
+  // console.log(option);
   const {
     validateMessages,
     onFieldsChange,
@@ -43,11 +44,13 @@ function createBaseForm(option = {}, mixins = []) {
   } = option;
 
   return function decorate(WrappedComponent) {
+    // console.dir(WrappedComponent);
     const Form = createReactClass({
       mixins,
 
       getInitialState() {
         const fields = mapPropsToFields && mapPropsToFields(this.props);
+        // console.log(fields);
         this.fieldsStore = createFieldsStore(fields || {});
 
         this.instances = {};
@@ -101,6 +104,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       onCollectCommon(name, action, args) {
+        debugger;
         const fieldMeta = this.fieldsStore.getFieldMeta(name);
         if (fieldMeta[action]) {
           fieldMeta[action](...args);
@@ -181,11 +185,12 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       getFieldDecorator(name, fieldOption) {
+        // debugger;
         const props = this.getFieldProps(name, fieldOption);
+        // console.log(props);
         return fieldElem => {
           // We should put field in record if it is rendered
           this.renderFields[name] = true;
-
           const fieldMeta = this.fieldsStore.getFieldMeta(name);
           const originalProps = fieldElem.props;
           if (process.env.NODE_ENV !== 'production') {
@@ -236,7 +241,6 @@ function createBaseForm(option = {}, mixins = []) {
             '`option.exclusive` of `getFieldProps`|`getFieldDecorator` had been remove.',
           );
         }
-
         delete this.clearedFieldMetaCache[name];
 
         const fieldOption = {
@@ -253,7 +257,6 @@ function createBaseForm(option = {}, mixins = []) {
           validateTrigger = trigger,
           validate,
         } = fieldOption;
-
         const fieldMeta = this.fieldsStore.getFieldMeta(name);
         if ('initialValue' in fieldOption) {
           fieldMeta.initialValue = fieldOption.initialValue;
@@ -272,7 +275,9 @@ function createBaseForm(option = {}, mixins = []) {
           rules,
           validateTrigger,
         );
+        // console.log(validateRules);
         const validateTriggers = getValidateTriggers(validateRules);
+        // console.log(inputProps);
         validateTriggers.forEach(action => {
           if (inputProps[action]) return;
           inputProps[action] = this.getCacheBind(
@@ -296,6 +301,7 @@ function createBaseForm(option = {}, mixins = []) {
           ...fieldOption,
           validate: validateRules,
         };
+        // console.log(meta);
         this.fieldsStore.setFieldMeta(name, meta);
         if (fieldMetaProp) {
           inputProps[fieldMetaProp] = meta;
@@ -307,7 +313,7 @@ function createBaseForm(option = {}, mixins = []) {
 
         // This field is rendered, record it
         this.renderFields[name] = true;
-
+        // console.log(inputProps);
         return inputProps;
       },
 
@@ -343,7 +349,7 @@ function createBaseForm(option = {}, mixins = []) {
             this.fieldsStore.getNestedAllFields(),
           );
         }
-        this.forceUpdate(callback);
+        this.forceUpdate( );
       },
 
       setFieldsValue(changedValues, callback) {
@@ -500,8 +506,10 @@ function createBaseForm(option = {}, mixins = []) {
           );
           return;
         }
+        // console.log(allRules);
         const validator = new AsyncValidator(allRules);
         if (validateMessages) {
+          // console.log(validateMessages);
           validator.messages(validateMessages);
         }
         validator.validate(allValues, options, errors => {
@@ -595,11 +603,14 @@ function createBaseForm(option = {}, mixins = []) {
 
       validateFields(ns, opt, cb) {
         const pending = new Promise((resolve, reject) => {
+          // debugger;
           const { names, options } = getParams(ns, opt, cb);
+          // console.log('names,options,',names,options);
           let { callback } = getParams(ns, opt, cb);
           if (!callback || typeof callback === 'function') {
             const oldCb = callback;
             callback = (errors, values) => {
+              // console.log('values,',values);
               if (oldCb) {
                 oldCb(errors, values);
               }
@@ -610,6 +621,7 @@ function createBaseForm(option = {}, mixins = []) {
               }
             };
           }
+          // console.log(this.fieldsStore.getValidFieldsName());
           const fieldNames = names
             ? this.fieldsStore.getValidFieldsFullName(names)
             : this.fieldsStore.getValidFieldsName();

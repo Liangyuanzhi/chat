@@ -112,6 +112,7 @@ class FieldsStore {
 
   getFieldMeta(name) {
     this.fieldsMeta[name] = this.fieldsMeta[name] || {};
+    // console.log(this.fieldsMeta);
     return this.fieldsMeta[name];
   }
 
@@ -157,8 +158,8 @@ class FieldsStore {
   getFieldValuePropValue(fieldMeta) {
     const { name, getValueProps, valuePropName } = fieldMeta;
     const field = this.getField(name);
-    const fieldValue = 'value' in field ?
-      field.value : fieldMeta.initialValue;
+    // console.log(field);
+    const fieldValue = 'value' in field ? field.value : fieldMeta.initialValue;
     if (getValueProps) {
       return getValueProps(fieldValue);
     }
@@ -202,6 +203,7 @@ class FieldsStore {
   }
 
   getNestedField(name, getter) {
+    // console.log('getter',getter);
     const fullNames = this.getValidFieldsFullName(name);
     if (
       fullNames.length === 0 || // Not registered
