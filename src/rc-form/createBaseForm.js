@@ -52,7 +52,7 @@ function createBaseForm(option = {}, mixins = []) {
         const fields = mapPropsToFields && mapPropsToFields(this.props);
         // console.log(fields);
         this.fieldsStore = createFieldsStore(fields || {});
-
+        console.log(this.fieldsStore);
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};
@@ -213,10 +213,12 @@ function createBaseForm(option = {}, mixins = []) {
           }
           fieldMeta.originalProps = originalProps;
           fieldMeta.ref = fieldElem.ref;
+          // console.log(this.fieldsStore.getFieldValuePropValue(fieldMeta));
           const decoratedFieldElem = React.cloneElement(fieldElem, {
             ...props,
             ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
           });
+          // console.log(supportRef(fieldElem));
           return supportRef(fieldElem) ? (
             decoratedFieldElem
           ) : (
@@ -258,6 +260,7 @@ function createBaseForm(option = {}, mixins = []) {
           validate,
         } = fieldOption;
         const fieldMeta = this.fieldsStore.getFieldMeta(name);
+        // console.log(fieldMeta);
         if ('initialValue' in fieldOption) {
           fieldMeta.initialValue = fieldOption.initialValue;
         }
@@ -335,7 +338,10 @@ function createBaseForm(option = {}, mixins = []) {
           maybeNestedFields,
         );
         this.fieldsStore.setFields(fields);
+        // console.log('fields,',fields);
         if (onFieldsChange) {
+          // console.log(onFieldsChange);
+          // console.log(fields);
           const changedFields = Object.keys(fields).reduce(
             (acc, name) => set(acc, name, this.fieldsStore.getField(name)),
             {},
@@ -349,7 +355,8 @@ function createBaseForm(option = {}, mixins = []) {
             this.fieldsStore.getNestedAllFields(),
           );
         }
-        this.forceUpdate( );
+        this.forceUpdate(callback);
+        // this.setState({});
       },
 
       setFieldsValue(changedValues, callback) {
@@ -509,14 +516,16 @@ function createBaseForm(option = {}, mixins = []) {
         // console.log(allRules);
         const validator = new AsyncValidator(allRules);
         if (validateMessages) {
-          // console.log(validateMessages);
           validator.messages(validateMessages);
         }
+        // console.log(allValues);
         validator.validate(allValues, options, errors => {
           const errorsGroup = {
             ...alreadyErrors,
           };
+          // console.table('errorsGroup',errorsGroup);
           if (errors && errors.length) {
+            // console.table(errors);
             errors.forEach(e => {
               const errorFieldName = e.field;
               let fieldName = errorFieldName;
@@ -549,7 +558,7 @@ function createBaseForm(option = {}, mixins = []) {
 
                 return false;
               });
-
+              console.table('errorsGroup',errorsGroup);
               const field = get(errorsGroup, fieldName);
               if (typeof field !== 'object' || Array.isArray(field)) {
                 set(errorsGroup, fieldName, { errors: [] });
@@ -728,7 +737,7 @@ function createBaseForm(option = {}, mixins = []) {
         return <WrappedComponent {...props} />;
       },
     });
-
+    // console.dir(unsafeLifecyclesPolyfill(Form));
     return argumentContainer(unsafeLifecyclesPolyfill(Form), WrappedComponent);
   };
 }

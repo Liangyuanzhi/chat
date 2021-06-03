@@ -31,6 +31,7 @@ class FieldsStore {
 
   flattenRegisteredFields(fields) {
     const validFieldsName = this.getAllFieldsName();
+    // console.log(validFieldsName);
     return flattenFields(
       fields,
       path => validFieldsName.indexOf(path) >= 0,
@@ -62,9 +63,11 @@ class FieldsStore {
       .forEach((f) => {
         nowValues[f] = this.getValueFromFields(f, nowFields);
       });
+      // console.log(nowValues);
     Object.keys(nowValues).forEach((f) => {
       const value = nowValues[f];
       const fieldMeta = this.getFieldMeta(f);
+      // console.log(fieldMeta);
       if (fieldMeta && fieldMeta.normalize) {
         const nowValue =
                 fieldMeta.normalize(value, this.getValueFromFields(f, this.fields), nowValues);

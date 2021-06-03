@@ -4,7 +4,8 @@ const Demo = createReactClass({
     // console.log(this.props);
   },
   render() {
-    return <div>Class</div>;
+    console.log(this.props);
+    return <span>I am Class Component by createReactClass!</span>;
   },
 });
 

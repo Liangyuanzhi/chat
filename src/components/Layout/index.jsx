@@ -18,14 +18,14 @@ import {
 } from "./config/routes";
 import menu from "./config/menu";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 let menuSource;
 const rootSubmenuKeys = [];
 const { SubMenu } = Menu;
 
 const LayoutWpper = (props) => {
-  const {
-    location: { pathname = "" },
+  let {
+    location: { pathname = "/" },
   } = props;
   const [openKeys, setOpenKeys] = React.useState([pathname]);
   // SubMenu 展开/关闭的回调
@@ -41,6 +41,7 @@ const LayoutWpper = (props) => {
   const returnMenu = (data) => {
     return data.map((item) => {
       if (!item.children) {
+        setOpenKeys(['/subnav1']);
         return (
           <Menu.Item key={item.path} icon={item.icon}>
             <Link to={item.path}>{item.title}</Link>
@@ -84,11 +85,6 @@ const LayoutWpper = (props) => {
             background: "rgba(255, 255, 255, 0.3)",
           }}
         >
-          {/* <img
-            src="../../assets/yay.jpg"
-            alt=""
-            style={{ width: "35px", height: "35px" }}
-          /> */}
         </div>
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="1">nav 1</Menu.Item>
@@ -99,15 +95,14 @@ const LayoutWpper = (props) => {
       <Content
         style={{ padding: "0 50px", marginTop: "80px", marginBottom: "50px" }}
       >
-        {/* <Breadcrumb style={{ margin: "16px 0" }}>
+        <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb> */}
+        </Breadcrumb>
         <Layout
           style={{ height: "100%" }}
           className="site-layout-background"
-          // style={{ padding: "24px 0" }}
         >
           <Sider
             className="site-layout-background"
