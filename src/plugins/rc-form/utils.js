@@ -160,8 +160,7 @@ export function supportRef(nodeOrComponent) {
   const type = isMemo(nodeOrComponent)
     ? nodeOrComponent.type.type
     : nodeOrComponent.type;
-  // console.dir(typeof type);
-  // console.dir(type);
+ 
   // Function component node
   if (typeof type === 'function' && !(type.prototype && type.prototype.render)) {
     return false;

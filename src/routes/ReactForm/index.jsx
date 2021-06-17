@@ -1,100 +1,114 @@
 import React, { useEffect } from "react";
-import { createForm } from "../../rc-form";
-// import ReactClass from "./components/ReactClass";
+import { createForm } from "../../plugins/rc-form";
 import AntdForm from "./components/AntdForm";
-import FnClass from "./components/FnClass";
-import AsyncValidator from "async-validator";
+import FnComponent from "./components/FnClass";
+import Input from "./components/Input";
+import Password from "./components/Password";
+// import ReactClass from "./components/ReactClass";
+// import AsyncValidator from "async-validator";
 import { Card } from "antd";
 
 const RcForm = (props) => {
   const {
-    form: { getFieldDecorator, validateFields },
+    form: { getFieldDecorator, validateFields, resetFields },
+    form,
   } = props;
+
+  useEffect(() => {
+    // initAsyncValidtor();
+  }, []);
 
   const handleSubmit = (e) => {
     e && e.preventDefault();
     validateFields((err, value) => {
       if (!err) {
-        console.table(value);
+        const {
+          user: {
+            object: { params = {} },
+          },
+        } = value;
+        console.table(params);
       }
     });
   };
-  const initAsyncValidtor = () => {
-    const descriptor = {
-      name: {
-        type: "string",
-        required: true,
-        validator: (rule, value) => value === "muji",
-        message: "请输入",
-      },
-    };
-    const validator = new AsyncValidator(descriptor);
-    validator.validate({ name: "" }, (errors, fields) => {
-      if (errors) {
-        // validation failed, errors is an array of all errors
-        // fields is an object keyed by field name with an array of
-        // errors per field
-        return {
-          errors,
-          fields,
-        };
-      }
-      // validation passed
-    });
 
-    // PROMISE USAGE
-    validator
-      .validate({ name: "muji", age: 16 })
-      .then(() => {
-        // validation passed or without error message
-      })
-      .catch(({ errors, fields }) => {
-        return {
-          errors,
-          fields,
-        };
-      });
+  const handleReset = (e) => {
+    e && e.preventDefault();
+    resetFields();
   };
 
-  useEffect(() => {
-    // initAsyncValidtor();
-  }, []);
   return (
     <div style={{ padding: 20, background: "#fff" }}>
       <form onSubmit={handleSubmit}>
-        <label>姓名: </label>
-        {getFieldDecorator("user.username", {
+        {getFieldDecorator("user.object.params.username", {
           rules: [{ required: true, message: "请输入用户名!" }],
-          // initialValue: "peter",
-        })(<input type="text" />)}
-        <br />
-        <label>密码: </label>
-        {getFieldDecorator("user.password", {
+          // initialValue: "rose",
+        })(
+          <Input
+            required
+            label="姓名"
+            type="text"
+            form={form}
+            name="user.object.params.username"
+          />
+        )}
+
+        {getFieldDecorator("user.object.params.password", {
           rules: [
             { required: true, message: "请输入密码!" },
-            { pattern: /^[a-z0-9_-]{6,18}$/, message: "只允许数字!" },
+            { pattern: /^[a-z0-9_-]{6,18}$/, message: "6-18位,只允许数字!" },
           ],
-          initialValue: "32u4324343443",
-        })(<input type="password" style={{ margin: "15px 0" }} />)}
-        <br />
-        <label>备注: </label>
-        {getFieldDecorator("user.memo", {
+        })(
+          <Password required form={form} name="user.object.params.password" />
+        )}
+
+        {getFieldDecorator("user.object.params.memo", {
           rules: [{ required: true, message: "请输入备注!" }],
-        })(<FnClass />)}
-        <br />
-        <label>记住密码: </label>
-        {getFieldDecorator("user.lockpassword", {
+        })(
+          <FnComponent
+            required
+            label="备注"
+            type="textarea"
+            form={form}
+            name="user.object.params.memo"
+          />
+        )}
+
+        {getFieldDecorator("user.object.params.lockpassword", {
           valuePropName: "checked",
-        })(<input type="checkbox" style={{ marginTop: "15px" }} />)}
-        <br />
-        <button style={{ marginTop: "15px" }}>提交</button>
+          // initialValue: true
+        })(
+          <Input
+            label="记住密码"
+            type="checkbox"
+            form={form}
+            name="user.object.params.lockpassword"
+          />
+        )}
+
+        <button onClick={handleReset} style={{ marginRight: "10px" }}>
+          重置
+        </button>
+        <button>提交</button>
       </form>
-      <Card style={{marginTop: '20px'}}>
+
+      <Card style={{ marginTop: "20px" }}>
         <AntdForm />
       </Card>
+
     </div>
   );
 };
+
 export default createForm({
-  name: "react-form",
+  // validateMessages: "自定义错误效验信息!",
+  // onFieldsChange: () => {},
+  // onValuesChange: (options, args, valuesAllSet) => {
+  //   // console.log(options, args, valuesAllSet);
+  // },
+  // fieldNameProp: "fieldNameProp",
+  // fieldMetaProp: "fieldMetaProp",
+  // fieldDataProp: "",
+  // formPropName: "form",
+  // name: "rc-form-component",
 })(RcForm);

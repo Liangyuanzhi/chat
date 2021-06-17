@@ -1,53 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox, Upload } from "antd";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
-const layout = {
-  labelCol: {
-    span: 5,
-  },
-  wrapperCol: {
-    span: 19,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 5,
-    span: 19,
-  },
-};
-const normFile = (e) => {
-  console.log("Upload event:", e);
+import { InboxOutlined } from "@ant-design/icons";
+import { layout, tailLayout } from "./config/layout";
 
-  if (Array.isArray(e)) {
-    return e;
-  }
-
-  return e && e.fileList;
-};
 const Demo = () => {
+  const [form] = Form.useForm();
+
+  const { resetFields } = form;
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    console.table("Success:", values);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.table("Failed:", errorInfo);
   };
+
+  const normFile = (e) => {
+    console.log("Upload event:", e);
+
+    if (Array.isArray(e)) {
+      return e;
+    }
+
+    return e && e.fileList;
+  };
+
+  useEffect(() => {
+    // console.log("form:", form);
+  }, []);
 
   return (
     <Form
+      form={form}
       style={{ width: "420px" }}
       {...layout}
       name="basic"
-      initialValues={{
-        remember: true,
-      }}
+      initialValues={{}}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
         label="Username"
         name="username"
-        initialValue='rose'
+        initialValue="rose"
         rules={[
           {
             required: true,
@@ -105,8 +101,21 @@ const Demo = () => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{ marginRight: "15px" }}
+        >
           Submit
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            // console.log("resetFields():");
+            resetFields();
+          }}
+        >
+          Reset
         </Button>
       </Form.Item>
     </Form>

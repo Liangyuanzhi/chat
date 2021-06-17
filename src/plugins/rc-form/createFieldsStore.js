@@ -83,6 +83,7 @@ class FieldsStore {
   }
 
   resetFields(ns) {
+    // debugger;
     const { fields } = this;
     const names = ns ?
       this.getValidFieldsFullName(ns) :
@@ -206,7 +207,6 @@ class FieldsStore {
   }
 
   getNestedField(name, getter) {
-    // console.log('getter',getter);
     const fullNames = this.getValidFieldsFullName(name);
     if (
       fullNames.length === 0 || // Not registered
@@ -241,6 +241,7 @@ class FieldsStore {
   }
 
   getFieldError = (name) => {
+    // console.log('error.info:',this.getField(name).errors);
     return this.getNestedField(
       name,
       (fullName) => getErrorStrs(this.getFieldMember(fullName, 'errors'))

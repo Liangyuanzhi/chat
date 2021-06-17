@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 09:59:35
- * @LastEditTime: 2021-04-30 17:37:20
+ * @LastEditTime: 2021-06-11 16:24:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /chat-app/src/components/Layout/config/menu.js
@@ -26,7 +26,7 @@ import {
 } from "@ant-design/icons";
  const menu = [
   {
-    title: "Subnav 1",
+    title: "导航菜单 1",
     key: "subnav1",
     path: "/subnav1",
     icon: <UserOutlined />,
@@ -58,7 +58,7 @@ import {
     ],
   },
   {
-    title: "Subnav 2",
+    title: "导航菜单 2",
     key: "subnav2",
     path: "/subnav2",
     icon: <LaptopOutlined />,
@@ -90,7 +90,7 @@ import {
     ],
   },
   {
-    title: "Subnav 3",
+    title: "导航菜单 3",
     key: "subnav3",
     path: "/subnav3",
     icon: <NotificationOutlined />,

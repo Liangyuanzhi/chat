@@ -44,6 +44,7 @@ function createBaseForm(option = {}, mixins = []) {
   } = option;
 
   return function decorate(WrappedComponent) {
+    let number = 0;
     // console.dir(WrappedComponent);
     const Form = createReactClass({
       mixins,
@@ -52,7 +53,7 @@ function createBaseForm(option = {}, mixins = []) {
         const fields = mapPropsToFields && mapPropsToFields(this.props);
         // console.log(fields);
         this.fieldsStore = createFieldsStore(fields || {});
-        console.log(this.fieldsStore);
+        // console.log(this.fieldsStore);
         this.instances = {};
         this.cachedBind = {};
         this.clearedFieldMetaCache = {};
@@ -185,6 +186,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       getFieldDecorator(name, fieldOption) {
+        console.log('name渲染了'+(number++)+"次: "+name);
         // debugger;
         const props = this.getFieldProps(name, fieldOption);
         // console.log(props);
@@ -218,7 +220,7 @@ function createBaseForm(option = {}, mixins = []) {
             ...props,
             ...this.fieldsStore.getFieldValuePropValue(fieldMeta),
           });
-          // console.log(supportRef(fieldElem));
+          // console.log(`支持ref的组件名称${name}为: ${supportRef(fieldElem)}`);
           return supportRef(fieldElem) ? (
             decoratedFieldElem
           ) : (
@@ -272,7 +274,6 @@ function createBaseForm(option = {}, mixins = []) {
         if (fieldNameProp) {
           inputProps[fieldNameProp] = formName ? `${formName}_${name}` : name;
         }
-
         const validateRules = normalizeValidateRules(
           validate,
           rules,
@@ -334,6 +335,7 @@ function createBaseForm(option = {}, mixins = []) {
       },
 
       setFields(maybeNestedFields, callback) {
+        // 不能在呈现与该值关联的字段之前设置表单字段。
         const fields = this.fieldsStore.flattenRegisteredFields(
           maybeNestedFields,
         );
@@ -516,6 +518,7 @@ function createBaseForm(option = {}, mixins = []) {
         // console.log(allRules);
         const validator = new AsyncValidator(allRules);
         if (validateMessages) {
+          // console.log(validateMessages);
           validator.messages(validateMessages);
         }
         // console.log(allValues);
@@ -558,7 +561,7 @@ function createBaseForm(option = {}, mixins = []) {
 
                 return false;
               });
-              console.table('errorsGroup',errorsGroup);
+              // console.table('errorsGroup',errorsGroup);
               const field = get(errorsGroup, fieldName);
               if (typeof field !== 'object' || Array.isArray(field)) {
                 set(errorsGroup, fieldName, { errors: [] });

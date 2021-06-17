@@ -41,7 +41,6 @@ const LayoutWpper = (props) => {
   const returnMenu = (data) => {
     return data.map((item) => {
       if (!item.children) {
-        setOpenKeys(['/subnav1']);
         return (
           <Menu.Item key={item.path} icon={item.icon}>
             <Link to={item.path}>{item.title}</Link>
@@ -77,33 +76,48 @@ const LayoutWpper = (props) => {
         }}
       >
         <div
+          onClick={() => <Link to='/' />}
           className="logo"
           style={{
-            width: "120px",
+            width: "220px",
             height: "31px",
             margin: "16px 24px 16px 0",
-            background: "rgba(255, 255, 255, 0.3)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: 'pointer',
           }}
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="-11.5 -10.23174 23 20.46348"
+            style={{ width: "30px", height: "30px" }}
+          >
+            <title>React Logo</title>
+            <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
+            <g stroke="#61dafb" stroke-width="1" fill="none">
+              <ellipse rx="11" ry="4.2" />
+              <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+              <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+            </g>
+          </svg>
+          <h3 style={{ color: "#fff", marginLeft: "15px" }}>React Pro</h3>
         </div>
         <Menu theme="dark" mode="horizontal">
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="1">文档</Menu.Item>
+          <Menu.Item key="2">Github</Menu.Item>
+          <Menu.Item key="3">退出登录</Menu.Item>
         </Menu>
       </Header>
       <Content
         style={{ padding: "0 50px", marginTop: "80px", marginBottom: "50px" }}
       >
-        <Breadcrumb style={{ margin: "16px 0" }}>
+        {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <Layout
-          style={{ height: "100%" }}
-          className="site-layout-background"
-        >
+        </Breadcrumb> */}
+        <Layout style={{ height: "100%" }} className="site-layout-background">
           <Sider
             className="site-layout-background"
             width={256}
@@ -145,9 +159,6 @@ const LayoutWpper = (props) => {
           </Content>
         </Layout>
       </Content>
-      {/* <Footer style={{ textAlign: "center" }}>
-        Ant Design ©2018 Created by Ant UED
-      </Footer> */}
     </Layout>
   );
 };
