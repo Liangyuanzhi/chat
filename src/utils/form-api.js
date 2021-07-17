@@ -1,0 +1,18 @@
+/**
+getFieldError: ƒ (name)
+getFieldInstance: ƒ getFieldInstance(name)
+getFieldValue: ƒ (name)
+getFieldsError: ƒ (nameList)
+getFieldsValue: ƒ (nameList, filterFunc)
+getInternalHooks: ƒ (key)
+isFieldTouched: ƒ (name)
+isFieldValidating: ƒ (name)
+isFieldsTouched: ƒ ()
+isFieldsValidating: ƒ (nameList)
+resetFields: ƒ (nameList)
+scrollToField: ƒ scrollToField(name)
+setFields: ƒ (fields)
+setFieldsValue: ƒ (store)
+submit: ƒ ()
+validateFields: ƒ (nameList, options)
+ */

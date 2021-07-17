@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-
-class index extends Component {
+import { Card } from "antd";
+import DynamicTable from "../../components/DynamicTable";
+export default class index extends Component {
   render() {
-    return <div>Input</div>;
+    return (
+      <Card>
+        <DynamicTable />
+      </Card>
+    );
   }
 }
-
-export default index;
