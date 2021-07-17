@@ -9,9 +9,15 @@
   },
   "dependencies": {
     "@chatui/core": "^0.3.2",
+    "@zcy/doraemon": "^2.6.8",
+    "antd": "^4.15.2",
+    "array-move": "^3.0.1",
+    "async-validator": "^3.5.2",
+    "create-react-class": "^15.7.0",
     "dva": "^2.4.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-sortable-hoc": "^2.0.0"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",
