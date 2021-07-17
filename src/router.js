@@ -1,14 +1,17 @@
-import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
-import IndexPage from './routes/IndexPage';
-
+import React from "react";
+import { routerRedux, Route } from "dva/router";
+// import IndexPage from './routes/IndexPage';
+import Layout from "./components/Layout";
+const { ConnectedRouter } = routerRedux;
 function RouterConfig({ history }) {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="/" exact component={IndexPage} />
-      </Switch>
-    </Router>
+    <ConnectedRouter history={history}>
+      <Route
+        path="/"
+        render={(props) => <Layout {...props} />}
+        redirectPath="/exception/403"
+      />
+    </ConnectedRouter>
   );
 }
 

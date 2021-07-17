@@ -1,6 +1,7 @@
 import dva from 'dva';
-import './index.css';
-
+import './style/main.less'
+import 'antd/dist/antd.less'; // or 'antd/dist/antd.less'
+import "./assets/style/animate.css";
 // 1. Initialize
 const app = dva();
 
@@ -8,7 +9,8 @@ const app = dva();
 app.use({});
 
 // 3. Model
-app.model(require('./models/example').default);
+// app.model(require('./models/example').default);
+app.model(require('./models/table').default);
 
 // 4. Router
 app.router(require('./router').default);
